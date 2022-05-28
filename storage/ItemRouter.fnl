@@ -5,6 +5,10 @@
 (dec-require)
 
 (local lib (include :lib))
+(local network (include :network))
+
+(network.init)
+(network.open 1)
 
 ;; variables
 (dec-component CSimple1 "Container Simple 1")
@@ -122,7 +126,9 @@
 (fn emergency-stop []
   (_G.computer.beep 10)
   (set working false)
-  (set stop true))
+  (set stop true)
+	(network.broadcast 1 true nil)
+)
 
 (fn event-trigger [sender]
   (match sender
@@ -140,6 +146,7 @@
         (set working value)
         (if value
             (run-all))))
+	(network.broadcast 1 false value)
   (buttons-update))
 
 (fn loop [timeout]
