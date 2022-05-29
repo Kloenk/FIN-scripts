@@ -1,4 +1,4 @@
-; vim: syntax=lips
+; vim: syntax=lisp
 
 (import-macros {: dec-component : dec-module : dec-require} :macro)
 
@@ -127,8 +127,7 @@
   (_G.computer.beep 10)
   (set working false)
   (set stop true)
-	(network.broadcast 1 true nil)
-)
+  (network.broadcast 1 true nil))
 
 (fn event-trigger [sender]
   (match sender
@@ -146,7 +145,7 @@
         (set working value)
         (if value
             (run-all))))
-	(network.broadcast 1 false value)
+  (network.broadcast 1 false value)
   (buttons-update))
 
 (fn loop [timeout]
